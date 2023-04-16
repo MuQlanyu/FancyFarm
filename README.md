@@ -1,10 +1,10 @@
+# Необходимая версия Python: не выше 3.10
 # Запуск
 ## Linux
 1) git clone git@github.com:MuQlanyu/FancyFarm.git
-2) cd FancyFarm
-3) git switch dev
-4) cd FancyFarm
-5) python3 FancyFarm.py
+2) git switch dev
+3) cd FancyFarm
+4) python3 FancyFarm.py
 # Описание игры:
 Однопользовательская игра, что-то вроде имитации фермы.
 Когда игра открывается перед пользователем появляются несколько объектов: поле, склад, колодец, машина и самолет
