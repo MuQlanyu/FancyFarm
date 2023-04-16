@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd FancyFarm
 pip install virtualenv
 virtualenv venv
 source venv/bin/activate
