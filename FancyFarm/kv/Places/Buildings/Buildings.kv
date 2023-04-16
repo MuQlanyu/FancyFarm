@@ -1,0 +1,44 @@
+#: kivy 2.0.0
+
+<Buildings>
+    orientation: "horizontal"
+
+<LeftBuildings>
+    create_button: create_button
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.2
+        Widget:
+            size_hint_y: 0.2
+        Button:
+            size_hint_y: 0.2
+            text: "+1"
+            on_press: root.increase_level()
+        Widget:
+            size_hint_y: 0.6
+    Button:
+        id: create_button
+        size_hint_x: 0.8
+        text: "create"
+        on_press: root.create()
+
+<RightBuildings>
+    create_button: create_button
+
+    Button:
+        id: create_button
+        size_hint_x: 0.8
+        text: "create"
+        on_press: root.create()
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.2
+        Widget:
+            size_hint_y: 0.2
+        Button:
+            size_hint_y: 0.2
+            text: "+1"
+            on_press: root.increase_level()
+        Widget:
+            size_hint_y: 0.6

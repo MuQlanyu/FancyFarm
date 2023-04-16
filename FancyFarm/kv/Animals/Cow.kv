@@ -1,0 +1,12 @@
+#: kivy 2.0.0
+
+<Cow>:
+    id: cow
+    size_hint: None, None
+    background_color: (77/255, 72/255, 53/255, 0.8)
+    canvas:
+        Color:
+            rgba: self.background_color
+        Ellipse:
+            size: self.size
+            pos: self.pos

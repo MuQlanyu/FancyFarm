@@ -1,0 +1,158 @@
+#: kivy 2.0.0
+
+<VoidLabel@Label>:
+    background_color: (0.2, 0.2, 0.2, 1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<AnimalButton@Button>:
+    background_color: (0.8, 0.8, 0.8, 0.3)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [50]
+
+
+<Map>:
+    field: playing_field
+    car: car
+    storage: storage
+    money_label: money_label
+
+    animal_button1: animal_button1
+    animal_button2: animal_button2
+    animal_button3: animal_button3
+    animal_button4: animal_button4
+    animal_button5: animal_button5
+
+    flour_creator: flour_creator
+    oil_creator: oil_creator
+    cheese_creator: cheese_creator
+    cutting_creator: cutting_creator
+
+    size_hint: 1, 1
+    BoxLayout
+        orientation: "vertical"
+        rows: 3
+        padding: 10
+        spacing: 5
+        BoxLayout:
+            size_hint_y: 0.15
+            orientation: "horizontal"
+            cols: 3
+            padding: 5
+            spacing: 20
+            pos:
+            BoxLayout:
+                size_hint_x: 2
+                orientation: "horizontal"
+                padding: 5
+                spacing: 10
+                AnimalButton:
+                    id: animal_button1
+                    on_press: root.field.create_animal("chicken")
+                AnimalButton:
+                    id: animal_button2
+                    on_press: root.field.create_animal("goat")
+                AnimalButton:
+                    id: animal_button3
+                    on_press: root.field.create_animal("cow")
+                AnimalButton:
+                    id: animal_button4
+                    on_press: root.field.create_animal("pig")
+                AnimalButton:
+                    id: animal_button5
+            Button:
+                size_hint_x: 1
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_x: 2
+                spacing: 10
+                Widget:
+                    size_hint_x: 0.2
+                    canvas.before:
+                        Color:
+                            rgba: (70/250, 70/250, 70/250, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [15]
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_x: 0.3
+                    canvas.before:
+                        Color:
+                            rgba: (70/250, 70/250, 70/250, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [15]
+                    Button:
+                        size_hint_y: 0.6
+                        text: "time"
+                    Label:
+                        id: money_label
+                        size_hint_y: 0.4
+                Label:
+                    size_hint_x: 0.5
+                    text: "Some information"
+                    canvas.before:
+                        Color:
+                            rgba: (70/250, 70/250, 70/250, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [15]
+
+        BoxLayout:
+            size_hint_y: 0.8
+            spacing: 5
+            orientation: "horizontal"
+            cols: 3
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 20
+                padding: 10
+                size_hint_x: 0.3
+                FlourCreator:
+                    id: flour_creator
+                OilCreator:
+                    id: oil_creator
+                CheeseCreator:
+                    id: cheese_creator
+            PlayingField:
+                id: playing_field
+                size_hint_x: 1
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 20
+                padding: 10
+                size_hint_x: 0.3
+                CuttingCreator:
+                    id: cutting_creator
+                Widget:
+                Widget:
+        BoxLayout:
+            size_hint_y: 0.2
+            spacing: 15
+            padding: 10
+            orientation: "horizontal"
+            cols: 3
+            Car:
+                id: car
+                size_hint_x: 4
+                text: "Car"
+            Storage:
+                id: storage
+                size_hint_x: 3
+            VoidLabel:
+                size_hint_x: 4
+                text: "Plane"

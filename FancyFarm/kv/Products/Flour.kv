@@ -1,0 +1,12 @@
+#: kivy 2.0.0
+
+<Flour>:
+    id: flour
+    size_hint: None, None
+    on_touch_down: root.on_click()
+    canvas.before:
+        Color:
+            rgba: (163/255, 145/255, 72/255, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos

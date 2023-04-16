@@ -1,0 +1,13 @@
+#: kivy 2.0.0
+
+<Egg>:
+    id: egg
+    size_hint: None, None
+    background_color: (176/255, 157/255, 107/255, 0.5)
+    on_touch_down: root.on_click()
+    canvas:
+        Color:
+            rgba: self.background_color
+        Ellipse:
+            size: self.size
+            pos: self.pos

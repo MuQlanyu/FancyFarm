@@ -1,0 +1,175 @@
+#: kivy 2.0.0
+
+<Header@StorageProduct>
+    Label:
+        size_hint_x: 0.1
+        text: "sell"
+
+<CarProduct>:
+    Button:
+        size_hint_x: 0.1
+        text: "sell"
+        on_press: root.sell_product()
+
+<AnimalProduct>:
+    an_name: animal_name
+    an_price: animal_price
+    an_cnt: animal_cnt
+
+    orientation: "horizontal"
+    spacing: 10
+    size_hint_y: 0.1
+    Label:
+        id: animal_name
+        size_hint_x: 0.4
+        text: "name"
+    Label:
+        id: animal_price
+        size_hint_x: 0.2
+        text: "price"
+    Label:
+        id: animal_cnt
+        size_hint_x: 0.1
+        text: "count"
+    Button:
+        size_hint_x: 0.1
+        text: "sell"
+        on_press: root.sell_product()
+
+<AnimalHeader@BoxLayout>:
+    an_name: animal_name
+    an_price: animal_price
+    an_cnt: animal_cnt
+
+    orientation: "horizontal"
+    spacing: 10
+    Label:
+        id: animal_name
+        size_hint_x: 0.4
+        text: "name"
+    Label:
+        id: animal_price
+        size_hint_x: 0.2
+        text: "price"
+    Label:
+        id: animal_cnt
+        size_hint_x: 0.1
+        text: "count"
+    Label:
+        size_hint_x: 0.1
+        text: "sell"
+
+<CarWindow>:
+    pr_list: product_list
+    an_list: animal_list
+    label: sell_label
+    sell_button: sell_button
+
+    size_hint: None, None
+    canvas.before:
+        Color:
+            rgba: (150/250, 150/250, 150/250, 1)
+        RoundedRectangle:
+            size: self.size
+            pos:self.pos
+            radius: [15]
+
+    BoxLayout:
+        orientation: "horizontal"
+        cols: 2
+        spacing: 50
+        padding: 10
+        BoxLayout:
+            size_hint_x: 0.65
+            orientation: "vertical"
+
+            canvas.before:
+                Color:
+                    rgba: (70/250, 70/250, 70/250, 1)
+                RoundedRectangle:
+                    size: self.size
+                    pos:self.pos
+                    radius: [15]
+
+            Header:
+                size_hint_y: 0.1
+                canvas.before:
+                    Color:
+                        rgba: (50/250, 50/250, 50/250, 1)
+                    RoundedRectangle:
+                        size: self.size
+                        pos:self.pos
+                        radius: [15]
+            BoxLayout:
+                id: product_list
+                size_hint_y: 1.5
+                orientation: "vertical"
+        BoxLayout:
+            size_hint_x: 0.35
+            orientation: "vertical"
+            spacing: 50
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: 1.1
+                canvas.before:
+                    Color:
+                        rgba: (70/250, 70/250, 70/250, 1)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [15]
+                AnimalHeader:
+                    size_hint_y: 0.1
+                    canvas.before:
+                        Color:
+                            rgba: (50/250, 50/250, 50/250, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [15]
+                BoxLayout:
+                    id: animal_list
+                    size_hint_y: 1
+                    orientation: "vertical"
+            BoxLayout:
+                size_hint_y: 0.4
+                orientation: "vertical"
+                canvas.before:
+                    Color:
+                        rgba: (70/250, 70/250, 70/250, 1)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [15]
+                Label:
+                    id: sell_label
+                    size_hint_y: 0.1
+                    text: "Weight"
+                    canvas.before:
+                        Color:
+                            rgba: (50/250, 50/250, 50/250, 1)
+                        RoundedRectangle:
+                            size: self.size
+                            pos:self.pos
+                            radius: [15]
+                Button:
+                    id: sell_button
+                    size_hint_y: 0.3
+                    text: "Sell"
+                    on_press: root.sell_all()
+
+
+<Car>:
+    button: car_button
+
+    orientation: "horizontal"
+    spacing: 20
+    padding: 10
+    Widget:
+        size_hint_x: 0.2
+    Button:
+        id: car_button
+        size_hint_x: 0.5
+        text: "Car"
+    Widget:
+        size_hint_x: 0.3

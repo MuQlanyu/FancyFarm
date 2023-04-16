@@ -1,0 +1,12 @@
+#: kivy 2.0.0
+
+<TruffleCutting>:
+    id: truffle_cutting
+    size_hint: None, None
+    on_touch_down: root.on_click()
+    canvas.before:
+        Color:
+            rgba: (84/255, 46/255, 23/255, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos

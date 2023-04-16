@@ -1,0 +1,91 @@
+#: kivy 2.0.0
+
+<StorageProduct>:
+    pr_number: product_number
+    pr_name: product_name
+    pr_price: product_price
+    pr_cnt: product_cnt
+    total_price: total_price
+
+    orientation: "horizontal"
+    spacing: 10
+    size_hint_y: 0.1
+    Label:
+        id: product_number
+        size_hint_x: 0.1
+        text: "№"
+    Label:
+        id: product_name
+        size_hint_x: 0.5
+        text: "name"
+    Label:
+        id: product_price
+        size_hint_x: 0.2
+        text: "price"
+    Label:
+        id: product_cnt
+        size_hint_x: 0.1
+        text: "count"
+    Label:
+        id: total_price
+        size_hint_x: 0.2
+        text: "total price"
+
+<StorageWindow>:
+    pr_list: product_list
+
+    size_hint: None, None
+    canvas.before:
+        Color:
+            rgba: (150/250, 150/250, 150/250, 1)
+        RoundedRectangle:
+            size: self.size
+            pos:self.pos
+            radius: [15]
+
+    BoxLayout:
+        orientation: "horizontal"
+        cols: 2
+        spacing: 50
+        padding: 10
+        BoxLayout:
+            size_hint_x: 0.7
+            orientation: "vertical"
+
+            canvas.before:
+                Color:
+                    rgba: (70/250, 70/250, 70/250, 1)
+                RoundedRectangle:
+                    size: self.size
+                    pos:self.pos
+                    radius: [15]
+
+            StorageProduct:
+                size_hint_y: 0.1
+                canvas.before:
+                    Color:
+                        rgba: (50/250, 50/250, 50/250, 1)
+                    RoundedRectangle:
+                        size: self.size
+                        pos:self.pos
+                        radius: [15]
+            BoxLayout:
+                id: product_list
+                size_hint_y: 1.5
+                orientation: "vertical"
+        BoxLayout:
+            size_hint_x: 0.3
+
+            canvas.before:
+                Color:
+                    rgba: (70/250, 70/250, 70/250, 1)
+                RoundedRectangle:
+                    size: self.size
+                    pos:self.pos
+                    radius: [15]
+
+<Storage>:
+    storage_button: storage_button
+    Button:
+        id: storage_button
+

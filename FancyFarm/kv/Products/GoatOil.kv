@@ -1,0 +1,12 @@
+#: kivy 2.0.0
+
+<GoatOil>:
+    id: goat_oil
+    size_hint: None, None
+    on_touch_down: root.on_click()
+    canvas.before:
+        Color:
+            rgba: (250, 238, 207, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
