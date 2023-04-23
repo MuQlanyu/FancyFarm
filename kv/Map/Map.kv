@@ -1,0 +1,202 @@
+#: kivy 2.0.0
+
+<VoidLabel@Label>:
+    background_color: (0.2, 0.2, 0.2, 1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<AnimalButton@Button>:
+    background_color: (0.8, 0.8, 0.8, 0.3)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [50]
+
+
+<BuyButtons@BoxLayout>:
+    animal_button1: but1
+    animal_button2: but2
+    animal_button3: but3
+    animal_button4: but4
+    animal_button5: but5
+    orientation: "horizontal"
+    padding: 5
+    spacing: 10
+    AnimalButton:
+        id: but1
+        on_press: root.parent.parent.parent.field.create_animal("chicken")
+    AnimalButton:
+        id: but2
+        on_press: root.parent.parent.parent.field.create_animal("goat")
+    AnimalButton:
+        id: but3
+        on_press: root.parent.parent.parent.field.create_animal("cow")
+    AnimalButton:
+        id: but4
+        on_press: root.parent.parent.parent.field.create_animal("pig")
+    AnimalButton:
+        id: but5
+
+
+<InfoField@BoxLayout>:
+    money_label: money_label
+    plane_pb: plane_pb
+    car_pb: car_pb
+
+    orientation: "horizontal"
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: (100/250, 100/250, 100/250, 1)
+        RoundedRectangle:
+            size: self.size
+            pos:self.pos
+            radius: [15]
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.3
+
+        canvas.before:
+            Color:
+                rgba: (70/250, 70/250, 70/250, 1)
+            RoundedRectangle:
+                size: self.size
+                pos:self.pos
+                radius: [15]
+        Widget:
+            size_hint_y: 0.6
+        Label:
+            id: money_label
+            size_hint_y: 0.4
+    BoxLayout:
+        size_hint_x: 0.7
+        orientation: "vertical"
+        padding: 40
+        spacing: 20
+        ProgressBar:
+            id: plane_pb
+        ProgressBar:
+            id: car_pb
+
+
+
+<LeftFabrics@BoxLayout>:
+    top_building: top_building
+    mid_building: mid_building
+    bottom_building: bottom_building
+    orientation: "vertical"
+    spacing: 20
+    padding: 10
+    FlourCreator:
+        id: top_building
+    OilCreator:
+        id: mid_building
+    CheeseCreator:
+        id: bottom_building
+
+
+<RightFabrics@BoxLayout>:
+    top_building: top_building
+    mid_building: mid_building
+    bottom_building: bottom_building
+    orientation: "vertical"
+    spacing: 20
+    padding: 10
+    CuttingCreator:
+        id: top_building
+    Button:
+        id: mid_building
+    Button:
+        id: bottom_building
+
+
+<CarStoragePlane@BoxLayout>:
+    car: car
+    storage: storage
+    plane: plane
+
+    size_hint_y: 0.2
+    spacing: 15
+    padding: 10
+    orientation: "horizontal"
+    cols: 3
+    Car:
+        id: car
+        size_hint_x: 4
+    Storage:
+        id: storage
+        size_hint_x: 3
+    Plane:
+        id: plane
+        size_hint_x: 4
+
+
+<Map>:
+    field: playing_field
+    car: car_storage_plane.car
+    storage: car_storage_plane.storage
+    plane: car_storage_plane.plane
+
+    money_label: info_field.money_label
+    car_progress_bar: info_field.car_pb
+    plane_progress_bar: info_field.plane_pb
+
+    animal_button1: buy_buttons.animal_button1
+    animal_button2: buy_buttons.animal_button2
+    animal_button3: buy_buttons.animal_button3
+    animal_button4: buy_buttons.animal_button4
+    animal_button5: buy_buttons.animal_button5
+
+    flour_creator: left_fabrics.top_building
+    oil_creator: left_fabrics.mid_building
+    cheese_creator: left_fabrics.bottom_building
+    cutting_creator: right_fabrics.top_building
+
+    size_hint: 1, 1
+    BoxLayout
+        orientation: "vertical"
+        rows: 3
+        padding: 10
+        spacing: 5
+        BoxLayout: # верхняя часть
+            size_hint_y: 0.15
+            orientation: "horizontal"
+            cols: 3
+            padding: 5
+            spacing: 20
+            pos:
+            BuyButtons:
+                id: buy_buttons
+                size_hint_x: 0.40
+            Button:
+                size_hint_x: 0.15
+                text: "Menu"
+                on_press: app.root.menu()
+            InfoField:
+                id: info_field
+                size_hint_x: 0.45
+        BoxLayout: # средняя часть
+            size_hint_y: 0.8
+            spacing: 5
+            orientation: "horizontal"
+            cols: 3
+            LeftFabrics:
+                id: left_fabrics
+                size_hint_x: 0.3
+            PlayingField:
+                id: playing_field
+                size_hint_x: 1
+            RightFabrics:
+                id: right_fabrics
+                size_hint_x: 0.3
+        CarStoragePlane: # нижняя часть
+            id: car_storage_plane
+            size_hint_y: 0.2

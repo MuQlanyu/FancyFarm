@@ -1,0 +1,61 @@
+#: kivy 2.0.0
+
+<Void@Widget>
+
+<Options>:
+    orientation: "horizontal"
+    Void:
+        size_hint_x: 0.4
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_x: 0.2
+        spacing: 20
+        Void:
+            size_hint_y: 0.3
+        Label:
+            size_hint_y: 0.1
+            text: "Когда-то тут будут настройки"
+        Button:
+            size_hint_y: 0.1
+            text: "Back to menu"
+            on_press: root.back_to_menu()
+        Void:
+            size_hint_y: 0.5
+    Void:
+        size_hint_x: 0.4
+
+
+
+<Menu>:
+    orientation: "horizontal"
+    Void:
+        size_hint_x: 0.1
+    BoxLayout:
+        size_hint_x: 0.2
+        orientation: "vertical"
+        Void:
+            size_hint_y: 0.2
+        BoxLayout:
+            size_hint_y: 0.5
+            orientation: "vertical"
+            spacing: 50
+            Label:
+                size_hint_y: 0.4
+                text: "FancyFarm"
+            Button:
+                size_hint_y: 0.2
+                text: "Game"
+                on_press: root.game()
+            Button:
+                size_hint_y: 0.2
+                text: "Options"
+                on_press: root.options()
+            Button:
+                size_hint_y: 0.2
+                text: "Exit"
+                on_press: root.exit()
+        Void:
+            size_hint_y: 0.3
+
+    Void:
+        size_hint_x: 0.7
