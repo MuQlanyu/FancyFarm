@@ -1,6 +1,6 @@
 from libs.libs import *
 from src.Map.Places.Places import Places
-from src.Data.Constants import BuildingsData, ProductsData
+from src.Data.Constants import BuildingsData, ProductsData, BasicData
 
 Builder.load_file("kv/Places/Buildings/Buildings.kv")
 
@@ -12,24 +12,29 @@ class Buildings(Places):
     Поля:
         execution_time: Устанавливает время выполнения продукта
     """
-    execution_time = BuildingsData.execution_time[0]
+    execution_time = BuildingsData.execution_time[0] * BasicData.FPS
+    product_type = None
+    is_creating = False
+    creation_event = None
+    creating_time = 0
 
     def __init__(self, **kwargs):
         super(Buildings, self).__init__(**kwargs)
 
-    @staticmethod
-    def create_template_base(recipe):
+    def create(self):
         """Определяет создание объектов буз задания местоположения"""
+        if self.is_creating: return
         storage = App.get_running_app().root.gaming_map.storage
-        for product_name, cnt in BuildingsData.recipes[recipe]:
+        for product_name, cnt in BuildingsData.recipes[self.product_type]:
             if product_name not in storage.storage or storage.storage[product_name][1] < cnt:
                 return
-        for product_name, cnt in BuildingsData.recipes[recipe]:
+        for product_name, cnt in BuildingsData.recipes[self.product_type]:
             for i in range(cnt):
                 storage.delete_product(product_name)
+        self.is_creating = True
+        self.creation_event = Clock.schedule_interval(self.creating_process, 1 / BasicData.FPS)
 
-    def create(self):
-        """Виртуальная функция создающая продукты"""
+    def creating_process(self, dt):
         pass
 
     def increase_level(self):
@@ -41,19 +46,31 @@ class Buildings(Places):
 
 class LeftBuildings(Buildings):
     """Класс Фабрик слева от поля"""
-    def create_template(self, recipe):
+    def creating_process(self, dt):
         """Доопределяет создание продуктов: задает местоположение"""
-        self.create_template_base(recipe)
-        field = App.get_running_app().root.gaming_map.field
-        field.create_product(ProductsData.products_dict[recipe][0],
-                             (self.right + self.size[0] / 10, self.y + self.size[1] / 2))
+        self.creating_time += 1
+        self.create_pb.value = self.creating_time / self.execution_time * 100
+        if self.creating_time >= self.execution_time:
+            self.is_creating = False
+            self.creating_time = 0
+            self.create_pb.value = 0
+            Clock.unschedule(self.creation_event)
+            field = App.get_running_app().root.gaming_map.field
+            field.create_product(ProductsData.products_dict[self.product_type][0],
+                                 (self.right + self.size[0] / 10, self.y + self.size[1] / 2))
 
 
 class RightBuildings(Buildings):
     """Класс Фабрик справа от поля"""
-    def create_template(self, recipe):
+    def creating_process(self, dt):
         """Доопределяет создание продуктов: задает местоположение"""
-        self.create_template_base(recipe)
-        field = App.get_running_app().root.gaming_map.field
-        field.create_product(ProductsData.products_dict[recipe][0],
-                             (self.x - self.size[0] / 10, self.y + self.size[1] / 2))
+        self.creating_time += 1
+        self.create_pb.value = self.creating_time / self.execution_time * 100
+        if self.creating_time >= self.execution_time:
+            self.is_creating = False
+            self.creating_time = 0
+            self.create_pb.value = 0
+            Clock.unschedule(self.creation_event)
+            field = App.get_running_app().root.gaming_map.field
+            field.create_product(ProductsData.products_dict[self.product_type][0],
+                                 (self.x - self.size[0] / 5, self.y + self.size[1] / 2))

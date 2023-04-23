@@ -1,9 +1,9 @@
 from libs.libs import *
-from src.Data.Constants import AnimalData, BasicData
+from src.Data.Constants import AnimalData, BasicData, ImageData
 import src.Data.Products.ProductsImport as Products
 
 
-class Animals(Widget):
+class Animals(Image):
     """
         Абстрактный класс для объектов типа: животное
         Задает базовое поведение наследников
@@ -23,12 +23,16 @@ class Animals(Widget):
     cost = None
     price = None
     weight = None
+    animal_type = None
 
-    speed = [None, None]
+    speed = [0, 0]
     change_dir_time = 0
 
     product_timer = 0
     drop_frequency = 0
+
+    image_timer = 0
+    current_image = 0
 
     def __int__(self, **kwargs):
         super(Animals, self).__init__(**kwargs)
@@ -47,13 +51,14 @@ class Animals(Widget):
             field.add_widget(product)
             field.products.append(product)
 
-    def set_parameters(self, animal_name):
+    def set_parameters(self):
         """Устанавливает все параметры объектов типа животное"""
-        self.name = AnimalData.animal_dict[animal_name][0]
-        self.weight = AnimalData.animal_dict[animal_name][1]
-        self.cost = AnimalData.animal_dict[animal_name][2]
-        self.price = AnimalData.animal_dict[animal_name][3]
-        self.drop_frequency = AnimalData.animal_dict[animal_name][4] * BasicData.FPS
+        self.name = AnimalData.animal_dict[self.animal_type][0]
+        self.weight = AnimalData.animal_dict[self.animal_type][1]
+        self.cost = AnimalData.animal_dict[self.animal_type][2]
+        self.price = AnimalData.animal_dict[self.animal_type][3]
+        self.drop_frequency = AnimalData.animal_dict[self.animal_type][4] * BasicData.FPS
+        self.size = AnimalData.animal_size[self.animal_type]
         self.update_speed([0, 0])
         self.speed = self.speed.copy()
 
@@ -88,6 +93,9 @@ class Animals(Widget):
                                                int(AnimalData.animal_max_speed * 70000)) / 70000
         self.speed[1] = direction[1] * randint(int(AnimalData.animal_max_speed * 7000),
                                                int(AnimalData.animal_max_speed * 70000)) / 70000
+        self.current_image = 0
+        self.image_timer = 0
+        self.source = ImageData.images_dict[self.animal_type][1 if self.speed[0] > 0 else 0][self.current_image]
         self.set_change_dir_time()
 
     def out_of_bound(self, bottom_left, top_right, change_dir, is_y):
@@ -97,6 +105,13 @@ class Animals(Widget):
                 change_dir[is_y] = 1
             if self.pos[is_y] + self.size[is_y] > top_right[is_y] and self.speed[is_y] >= 0:
                 change_dir[is_y] = -1
+
+    def change_image(self):
+        self.image_timer += 1
+        if self.image_timer > ImageData.image_frequency:
+            self.current_image = (self.current_image + 1) % 4
+            self.image_timer = 0
+            self.source = ImageData.images_dict[self.animal_type][1 if self.speed[0] > 0 else 0][self.current_image]
 
     def move(self, bottom_left, top_right, field):
         """
@@ -108,6 +123,7 @@ class Animals(Widget):
             при обнулении change_dir_time
         """
         self.product_drop(field)
+        self.change_image()
         self.pos[0] += self.speed[0]
         self.pos[1] += self.speed[1]
         change_dir = [0, 0]

@@ -1,4 +1,10 @@
 #: kivy 2.0.0
 
 <PlayingField>:
-    text: "oraoraora"
+    canvas.before:
+        Color:
+            rgba: (171/255, 127/255, 32/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos:self.pos
+            radius: [15]

@@ -26,6 +26,9 @@ class Menu(BoxLayout):
         self.clear_widgets()
         self.add_widget(place)
 
+    def menu(self):
+        self.change_place(Menu())
+
     def game(self):
         """Запускает игру"""
         self.gaming_map = Map()

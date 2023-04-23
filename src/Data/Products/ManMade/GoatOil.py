@@ -8,4 +8,4 @@ class GoatOil(Products):
     """Продукт: Козье масло"""
     def __init__(self, **kwargs):
         super(GoatOil, self).__init__(**kwargs)
-        self.set_parameters("goat milk")
+        self.set_parameters("goat oil")

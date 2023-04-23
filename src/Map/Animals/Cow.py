@@ -7,10 +7,11 @@ Builder.load_file("kv/Animals/Cow.kv")
 
 class Cow(Animals):
     """Животное: Корова"""
+    animal_type = "cow"
+
     def __init__(self, **kwargs):
         super(Cow, self).__init__(**kwargs)
-        self.size = AnimalData.animal_size
-        self.set_parameters("cow")
+        self.set_parameters()
 
     def product_drop(self, field):
         self.product_drop_template(field, "milk")

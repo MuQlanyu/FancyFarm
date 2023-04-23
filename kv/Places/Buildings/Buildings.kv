@@ -5,40 +5,47 @@
 
 <LeftBuildings>
     create_button: create_button
-
-    BoxLayout:
-        orientation: "vertical"
+    create_pb: create_pb
+    Widget:
         size_hint_x: 0.2
-        Widget:
-            size_hint_y: 0.2
-        Button:
-            size_hint_y: 0.2
-            text: "+1"
-            on_press: root.increase_level()
-        Widget:
-            size_hint_y: 0.6
-    Button:
-        id: create_button
+    BoxLayout:
         size_hint_x: 0.8
-        text: "create"
-        on_press: root.create()
+        orientation: "vertical"
+        Button:
+            id: create_button
+            size_hint_y: 0.95
+            text: "create"
+            on_press: root.create()
+        BoxLayout:
+            size_hint_y: 0.05
+            Widget:
+                size_hint_x: 0.4
+            ProgressBar:
+                id: create_pb
+                size_hint_x: 0.55
+            Widget:
+                size_hint_x: 0.05
 
 <RightBuildings>
     create_button: create_button
+    create_pb: create_pb
 
-    Button:
-        id: create_button
-        size_hint_x: 0.8
-        text: "create"
-        on_press: root.create()
     BoxLayout:
+        size_hint_x: 0.8
         orientation: "vertical"
-        size_hint_x: 0.2
-        Widget:
-            size_hint_y: 0.2
         Button:
-            size_hint_y: 0.2
-            text: "+1"
-            on_press: root.increase_level()
-        Widget:
-            size_hint_y: 0.6
+            id: create_button
+            size_hint_y: 0.95
+            text: "create"
+            on_press: root.create()
+        BoxLayout:
+            size_hint_y: 0.05
+            Widget:
+                size_hint_x: 0.05
+            ProgressBar:
+                id: create_pb
+                size_hint_x: 0.55
+            Widget:
+                size_hint_x: 0.4
+    Widget:
+        size_hint_x: 0.2

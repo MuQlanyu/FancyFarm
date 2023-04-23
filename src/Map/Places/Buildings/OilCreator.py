@@ -8,6 +8,4 @@ class OilCreator(LeftBuildings):
     """Фабрика: Козьего масла"""
     def __init__(self, **kwargs):
         super(OilCreator, self).__init__(**kwargs)
-
-    def create(self):
-        self.create_template("goat oil")
+        self.product_type = "goat oil"

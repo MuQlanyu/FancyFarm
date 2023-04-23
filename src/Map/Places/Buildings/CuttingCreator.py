@@ -8,6 +8,4 @@ class CuttingCreator(RightBuildings):
     """Фабрика: Нарезка трюфелей"""
     def __init__(self, **kwargs):
         super(CuttingCreator, self).__init__(**kwargs)
-
-    def create(self):
-        self.create_template("truffle сutting")
+        self.product_type = "truffle сutting"

@@ -8,6 +8,4 @@ class CheeseCreator(LeftBuildings):
     """Фабрика: Сыра"""
     def __init__(self, **kwargs):
         super(CheeseCreator, self).__init__(**kwargs)
-
-    def create(self):
-        self.create_template("cheese")
+        self.product_type = "cheese"

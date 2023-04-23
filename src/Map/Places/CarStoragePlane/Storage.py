@@ -1,52 +1,9 @@
 from libs.libs import *
 from src.Data.Constants import StorageData
 from src.Map.Places.Places import Places
+from src.Map.Places.Windows.StorageWindow import StorageWindow
 
 Builder.load_file("kv/Places/Storage.kv")
-
-
-class StorageProduct(BoxLayout):
-    """Виджет продуктов на складе"""
-
-    def __init__(self, **kwargs):
-        super(StorageProduct, self).__init__(**kwargs)
-
-    def set_parameters(self, product, cnt, number):
-        """Устанавливает параметры виджета"""
-        self.pr_number.text = str(number)
-        self.pr_name.text = product.name
-        self.pr_price.text = str(product.price)
-        self.pr_cnt.text = str(cnt)
-        self.total_price.text = str(product.price * cnt)
-        return self
-
-
-class StorageWindow(BoxLayout):
-    """
-        Окно Склада(открывается/закрывается при нажатии на виджет склада)
-    """
-
-    def __init__(self, **kwargs):
-        super(StorageWindow, self).__init__(**kwargs)
-
-    def set_product_list(self, storage):
-        """
-            Заполняет окно виджетами: StorageProduct(объекты на складе)
-        Магические константы:
-          1)Максимальный размер поля продуктов, при котором виджеты не меняют свой размер
-        """
-        ind = 1
-        for product, num in storage.values():
-            self.pr_list.add_widget(StorageProduct().set_parameters(product, num, ind))
-            ind += 1
-        if ind < 16:  # Маг константа 1
-            self.pr_list.add_widget(Widget(size_hint_y=(16 - ind) / 10))
-        return self
-
-    def clear_window(self):
-        """Очищает окно"""
-        self.pr_list.clear_widgets()
-        App.get_running_app().root.gaming_map.remove_widget(self)
 
 
 class Storage(Places):
@@ -90,18 +47,13 @@ class Storage(Places):
         """
             Проверяет нажатие на виджет машины:
           1)Если машины в пути, то ничего не произойдет
-          2)Если окно уже открыто, то закроет его
-          3)Если окно не открыто, то откроет его
+          2)Если окно не открыто, то откроет его
         """
         if self.collide_point(*touch.pos):
             if not self.is_opened:
                 self.is_opened = True
                 App.get_running_app().root.gaming_map.game_stop()
                 App.get_running_app().root.gaming_map.add_widget(self.window.set_product_list(self.storage))
-            else:
-                self.is_opened = False
-                App.get_running_app().root.gaming_map.game_start()
-                self.window.clear_window()
 
     def delete_product(self, product_name):
         """Метод удаления объектов со склада"""

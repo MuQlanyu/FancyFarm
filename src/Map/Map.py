@@ -51,6 +51,7 @@ class Map(FloatLayout):
         self.is_stopped = False
         self.events.append(Clock.schedule_interval(self.field.animal_movement, 1 / BasicData.FPS))
         self.events.append(Clock.schedule_interval(self.field.product_disappearing, 1 / BasicData.FPS))
+        self.events.append(Clock.schedule_interval(self.field.bear_process, 1 / BasicData.FPS))
 
     def game_stop(self):
         """Метод, приостанавливающий постоянно повторяющиеся события"""

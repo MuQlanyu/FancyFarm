@@ -8,6 +8,4 @@ class FlourCreator(LeftBuildings):
     """Фабрика: муки"""
     def __init__(self, **kwargs):
         super(FlourCreator, self).__init__(**kwargs)
-
-    def create(self):
-        self.create_template("flour")
+        self.product_type = "flour"
