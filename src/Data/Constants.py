@@ -101,7 +101,7 @@ class BearData:
 
     spawning_accuracy = 1e7
     spawning_chance = [0.3, 0.4, 0.3]
-    spawning_cycle = 5
+    spawning_cycle = 40
     spawning_cycle_deviation = 0.3
 
 
